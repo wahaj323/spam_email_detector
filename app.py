@@ -1,11 +1,10 @@
 from flask import Flask, render_template, request, flash
 import joblib
 import os
-from werkzeug.exceptions import BadRequest
 
 # Initialize Flask application
 app = Flask(__name__)
-app.secret_key = 'your-secret-key-change-this'  # Change this in production
+app.secret_key = 'secret12345'
 
 # Global variables to store the model and vectorizer
 model = None
@@ -13,10 +12,7 @@ vectorizer = None
 
 
 def load_models():
-    """
-    Load the pre-trained spam detection model and vectorizer.
-    This function is called when the application starts.
-    """
+
     global model, vectorizer
 
     try:
@@ -42,16 +38,7 @@ def load_models():
 
 
 def predict_spam(email_text):
-    """
-    Predict whether an email text is spam or ham.
 
-    Args:
-        email_text (str): The email text to classify
-
-    Returns:
-        tuple: (prediction, confidence) where prediction is 'spam' or 'ham'
-               and confidence is the probability score
-    """
     if model is None or vectorizer is None:
         raise RuntimeError("Models not loaded. Please check model files.")
 
@@ -84,11 +71,7 @@ def predict_spam(email_text):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    """
-    Main route that handles both displaying the form and processing submissions.
-    GET: Display the email input form
-    POST: Process the submitted email and show prediction results
-    """
+
     prediction_result = None
     confidence_score = None
     user_input = ""
@@ -129,10 +112,7 @@ def index():
 
 @app.route('/health')
 def health_check():
-    """
-    Simple health check endpoint to verify the application is running
-    and models are loaded properly.
-    """
+
     status = {
         'status': 'healthy',
         'model_loaded': model is not None,
