@@ -1,4 +1,3 @@
-
 import joblib
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
@@ -193,7 +192,13 @@ def train_spam_detector():
         "Win money fast! Click here now!",
         "Meeting scheduled for next Tuesday",
         "Free iPhone! Limited time offer!",
-        "Your order confirmation and tracking details"
+        "Your order confirmation and tracking details",
+        "Don't miss this investment opportunity!",
+        "Project update: please review the attached file",
+        "Lose 10 pounds in 7 days—guaranteed!",
+        "Lunch with the client is confirmed at 1 PM",
+        "Congratulations! You’ve been selected for a prize!",
+        "Weekly report ready for your review"
     ]
 
     for email in test_emails:
